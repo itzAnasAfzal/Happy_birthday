@@ -1624,11 +1624,17 @@ video {
   transform: translate(0, -50%) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1);
   background-color: rgb(255 241 200 / 0.8);
 }
+
+/* Desktop: disabled */
+.surprise-overlay {
+  display: none;
+}
 .reveal-message-panel {
   position: absolute;
   /* left: 2.5rem;
   right: 2.5rem; */
   /* bottom: 2.5rem; */
+
   z-index: 20;
   border-radius: 28px;
   border: 1px solid rgba(143, 90, 160, 0.15);
@@ -2700,6 +2706,31 @@ video {
   }
   .glow-trail {
     height: 48px;
+  }
+  .surprise-overlay {
+    display: block;
+    width: 1000vw;
+    height: 1000vh;
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: rgba(20, 15, 30, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+
+    z-index: 0;
+  }
+
+  .surprise-overlay.show {
+    opacity: 1;
+    visibility: visible;
   }
   .reveal-message-panel {
     left: 1rem;

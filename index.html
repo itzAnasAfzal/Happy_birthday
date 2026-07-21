@@ -594,6 +594,7 @@
           ><span class="dec-item p-11 float-butterfly">🦋</span
           ><span class="dec-item p-12 float-particle">💖</span>
         </div>
+
         <div id="ihl7p7" class="surprise-container">
           <div id="iay5b9" class="section-top-bar">
             <button
@@ -667,6 +668,7 @@
                     <div id="iw1lqj" class="gift-ribbon-horizontal"></div>
                   </div>
                 </div>
+                <div id="surprise-overlay" class="surprise-overlay"></div>
                 <div
                   id="surprise-reveal"
                   class="hidden-reveal reveal-message-panel"
@@ -787,6 +789,7 @@
       const effectsLayer = document.getElementById("effects-layer");
       const giftStage = document.getElementById("gift-stage");
       const closeSurpriseBtn = document.getElementById("close-surprise");
+      const surpriseOverlay = document.getElementById("surprise-overlay");
       // const typewriterMessage = document.getElementById("typewriter-message");
 
       const correctBirthday = "2026-07-21";
@@ -879,6 +882,11 @@
       const originalParent = giftRevealArea.parentNode;
       const originalNextSibling = giftRevealArea.nextElementSibling;
 
+      function toggleOverlay(show) {
+        if (window.innerWidth <= 992) {
+          surpriseOverlay.classList.toggle("show", show);
+        }
+      }
       function rearrangeGiftArea() {
         if (!giftRevealArea || !birthdayFormCard) return;
 
@@ -1196,6 +1204,7 @@
 
         // Delay panel entry by 1.2s so the gift opening animation completes fully first
         setTimeout(() => {
+          toggleOverlay(true);
           revealPanel.classList.add("show");
           // typeWriter(typewriterMessage, futureMessages[0], 35);
         }, 1200);
@@ -1243,6 +1252,7 @@
         revealPanel.classList.remove("show");
         giftBox.classList.remove("gift-open");
         giftStage.classList.remove("pulse-glow");
+        toggleOverlay(false);
         surpriseUnlocked = false;
       });
 
