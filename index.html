@@ -638,6 +638,7 @@
                     type="button"
                     id="check-birthday"
                     class="continue-button"
+                    disabled
                   >
                     Open My Surprise
                   </button>
@@ -670,6 +671,14 @@
                   id="surprise-reveal"
                   class="hidden-reveal reveal-message-panel"
                 >
+                  <button
+                    type="button"
+                    id="close-surprise"
+                    class="close-surprise-btn"
+                    aria-label="Close Surprise"
+                  >
+                    &times;
+                  </button>
                   <span id="is2bh2" class="reveal-label"
                     >Unlocked Surprise</span
                   >
@@ -777,9 +786,10 @@
       const revealPanel = document.getElementById("surprise-reveal");
       const effectsLayer = document.getElementById("effects-layer");
       const giftStage = document.getElementById("gift-stage");
+      const closeSurpriseBtn = document.getElementById("close-surprise");
       // const typewriterMessage = document.getElementById("typewriter-message");
 
-      const correctBirthday = "2002-10-09";
+      const correctBirthday = "2026-07-21";
       const funnyResponses = [
         "Oops, that is not the birthday this fairytale is waiting for.",
         "Close your eyes, think of 9 October 2002, and try again.",
@@ -860,6 +870,37 @@
       let surpriseUnlocked = false;
       let futureMessageIndex = 0;
       let transitionLock = false;
+
+      // ===== Responsive DOM Reordering =====
+      const giftRevealArea = document.querySelector(".gift-reveal-area");
+      const birthdayFormCard = document.querySelector(".birthday-form-card");
+
+      // Save the original parent and position
+      const originalParent = giftRevealArea.parentNode;
+      const originalNextSibling = giftRevealArea.nextElementSibling;
+
+      function rearrangeGiftArea() {
+        if (!giftRevealArea || !birthdayFormCard) return;
+
+        if (window.innerWidth <= 992) {
+          // Move above the birthday form
+          if (giftRevealArea.nextElementSibling !== birthdayFormCard) {
+            birthdayFormCard.parentNode.insertBefore(
+              giftRevealArea,
+              birthdayFormCard,
+            );
+          }
+        } else {
+          // Move back to its original location
+          if (giftRevealArea.parentNode !== originalParent) {
+            if (originalNextSibling) {
+              originalParent.insertBefore(giftRevealArea, originalNextSibling);
+            } else {
+              originalParent.appendChild(giftRevealArea);
+            }
+          }
+        }
+      }
 
       function clearSectionAnimationClasses(section) {
         Object.values(sectionEnterClasses).forEach((cls) =>
@@ -1148,7 +1189,6 @@
       function unlockSurprise() {
         if (surpriseUnlocked) return;
         surpriseUnlocked = true;
-        birthdayHint.className = "displayNone";
         birthdayResponse.textContent =
           "Birthday verified for 9 October 2002. Opening your beautiful surprise...";
         birthdayResponse.className = "response-area success";
@@ -1167,8 +1207,17 @@
         giftStage.classList.add("pulse-glow");
       }
 
+      // Initial button state
+      checkBirthdayBtn.disabled = birthdayInput.value === "";
+      // Enable/Disable button when the date changes
+      birthdayInput.addEventListener("input", () => {
+        checkBirthdayBtn.disabled = birthdayInput.value === "";
+      });
+
       checkBirthdayBtn.addEventListener("click", () => {
         const entered = birthdayInput.value;
+
+        birthdayHint.className = "displayNone";
         if (!entered) {
           birthdayResponse.textContent =
             "Please enter the birthday first so the vault can check it.";
@@ -1190,7 +1239,18 @@
           checkBirthdayBtn.click();
         }
       });
+      closeSurpriseBtn.addEventListener("click", () => {
+        revealPanel.classList.remove("show");
+        giftBox.classList.remove("gift-open");
+        giftStage.classList.remove("pulse-glow");
+        surpriseUnlocked = false;
+      });
 
+      // Apply responsive layout on page load
+      rearrangeGiftArea();
+
+      // Update when screen size changes
+      window.addEventListener("resize", rearrangeGiftArea);
       playRevealAnimation(currentSection);
       cycleFutureMessages();
     </script>

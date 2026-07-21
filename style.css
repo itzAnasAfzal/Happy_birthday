@@ -1412,13 +1412,13 @@ video {
   padding: 1.75rem;
   border: 1px solid rgba(143, 90, 160, 0.16);
   position: relative;
-  overflow: hidden;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.9),
     rgba(252, 247, 250, 0.96)
   );
   box-shadow: 0 16px 40px rgba(77, 51, 90, 0.1);
+  z-index: -1;
 }
 .date-label {
   margin-bottom: 0.75rem;
@@ -1513,6 +1513,27 @@ video {
   outline-offset: 2px;
   outline-color: #fff3cd;
 }
+
+.continue-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+
+  /* Optional visual tweaks */
+  filter: grayscale(25%);
+  transform: none;
+  box-shadow: none;
+}
+
+.continue-button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.continue-button:disabled:active {
+  transform: none;
+}
+
 .hint-text {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1624,6 +1645,40 @@ video {
 
   box-shadow: 0 20px 50px rgba(89, 56, 96, 0.12);
 }
+
+.close-surprise-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 34px;
+  height: 34px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+
+  color: rgba(143, 90, 160, 0.8);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.close-surprise-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg) scale(1.08);
+}
+
+.close-surprise-btn:active {
+  transform: scale(0.95);
+}
+
 .reveal-label {
   margin-bottom: 0.75rem;
   font-size: 0.75rem;
@@ -2649,7 +2704,6 @@ video {
   .reveal-message-panel {
     left: 1rem;
     right: 1rem;
-    bottom: 2.5rem;
   }
 }
 @media (max-width: 480px) {
@@ -2726,7 +2780,6 @@ video {
   .reveal-message-panel {
     left: 1rem;
     right: 1rem;
-    bottom: 1rem;
     padding: 1.25rem;
   }
   .reveal-heading {
