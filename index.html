@@ -13,6 +13,108 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./style.css" />
+    <style>
+      .dob-admin-panel {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: rgba(20, 12, 24, 0.55);
+        align-items: center;
+        justify-content: center;
+        font-family: "Inter", sans-serif;
+      }
+      .dob-admin-panel.show {
+        display: flex;
+      }
+      .dob-admin-box {
+        position: relative;
+        width: min(90vw, 380px);
+        background: #fffaf3;
+        border-radius: 16px;
+        padding: 28px 24px 22px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      }
+      .dob-admin-close {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        border: none;
+        background: none;
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        color: #7a5560;
+      }
+      .dob-admin-title {
+        margin: 0 0 6px;
+        font-size: 18px;
+        color: #5c3a4a;
+      }
+      .dob-admin-desc {
+        margin: 0 0 16px;
+        font-size: 13px;
+        color: #8a6c76;
+        line-height: 1.4;
+      }
+      .dob-admin-mode-note {
+        margin: -8px 0 16px;
+        font-size: 12px;
+        line-height: 1.4;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: #f3e6ec;
+        color: #7a5560;
+      }
+      .dob-admin-label {
+        display: block;
+        font-size: 12px;
+        color: #7a5560;
+        margin: 10px 0 4px;
+      }
+      .dob-admin-input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid #e3cdd6;
+        font-size: 14px;
+        font-family: inherit;
+      }
+      .dob-admin-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 16px;
+        flex-wrap: wrap;
+      }
+      .dob-admin-btn {
+        flex: 1 1 auto;
+        padding: 9px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        cursor: pointer;
+        border: 1px solid #c98fa8;
+      }
+      .dob-admin-btn-outline {
+        background: transparent;
+        color: #a8557a;
+      }
+      .dob-admin-btn-solid {
+        background: #a8557a;
+        color: #fff;
+      }
+      .dob-admin-status {
+        min-height: 16px;
+        font-size: 12px;
+        margin-top: 10px;
+      }
+      .dob-admin-status.is-success {
+        color: #3d7a4f;
+      }
+      .dob-admin-status.is-error {
+        color: #b23a4b;
+      }
+    </style>
   </head>
 
   <body class="gjs-t-body font-body body">
@@ -251,7 +353,7 @@
                 class="soft-panel floating gjs-t-border quote-panel"
               >
                 <span id="i2lqou" class="font-display quote-symbol not-editable"
-                  >“</span
+                  >"</span
                 >
                 <p id="iaz1c5" class="font-display quote-text">
                   Some people become a memory. Some become a wish. And some
@@ -264,7 +366,7 @@
                     Love Letter Idea One
                   </h3>
                   <p id="iudhrn" class="note-text">
-                    Write a “firsts” letter: first smile, first laugh, first
+                    Write a "firsts" letter: first smile, first laugh, first
                     unforgettable moment.
                   </p>
                 </div>
@@ -273,7 +375,7 @@
                     Love Letter Idea Two
                   </h3>
                   <p id="ixpnyk" class="note-text">
-                    Write a “future” letter: all the trips, birthdays, and quiet
+                    Write a "future" letter: all the trips, birthdays, and quiet
                     evenings you still dream of sharing.
                   </p>
                 </div>
@@ -282,7 +384,7 @@
                     Love Letter Idea Three
                   </h3>
                   <p id="itjyop" class="note-text">
-                    Write a “thank you” note: for comfort, patience, laughter,
+                    Write a "thank you" note: for comfort, patience, laughter,
                     warmth, and every beautiful little thing.
                   </p>
                 </div>
@@ -777,6 +879,61 @@
           </div>
         </div>
       </section>
+
+      <!-- Hidden panel: type "editdob" anywhere on the page to open it.
+           Lets you set the real birthday and export an updated file
+           with no backend and no visible UI change for guests. -->
+      <div
+        id="dob-admin-panel"
+        class="dob-admin-panel"
+        role="dialog"
+        aria-label="Set birthday (hidden panel)"
+      >
+        <div class="dob-admin-box">
+          <button
+            type="button"
+            id="dob-admin-close"
+            class="dob-admin-close"
+            aria-label="Close panel"
+          >
+            &times;
+          </button>
+          <h3 class="dob-admin-title">Set the real birthday</h3>
+          <p class="dob-admin-desc">
+            This is only visible to you. Set the correct date below, then
+            download the finished file and use it for hosting.
+          </p>
+          <p id="dob-admin-mode-note" class="dob-admin-mode-note"></p>
+          <label class="dob-admin-label" for="dob-admin-date">Birthday</label>
+          <input type="date" id="dob-admin-date" class="dob-admin-input" />
+          <label class="dob-admin-label" for="dob-admin-hint"
+            >Hint text shown on the vault (optional)</label
+          >
+          <input
+            type="text"
+            id="dob-admin-hint"
+            class="dob-admin-input"
+            placeholder="e.g. 9 October 2002"
+          />
+          <div class="dob-admin-actions">
+            <button
+              type="button"
+              id="dob-admin-apply"
+              class="dob-admin-btn dob-admin-btn-outline"
+            >
+              Preview only
+            </button>
+            <button
+              type="button"
+              id="dob-admin-download"
+              class="dob-admin-btn dob-admin-btn-solid"
+            >
+              Save &amp; Download Updated File
+            </button>
+          </div>
+          <p id="dob-admin-status" class="dob-admin-status"></p>
+        </div>
+      </div>
     </main>
     <script id="idhzw5">
       const appRoot =
@@ -796,7 +953,7 @@
       const surpriseOverlay = document.getElementById("surprise-overlay");
       // const typewriterMessage = document.getElementById("typewriter-message");
 
-      const correctBirthday = "2026-07-21";
+      let correctBirthday = "2026-07-21";
       const funnyResponses = [
         "Oops, that is not the birthday this fairytale is waiting for.",
         "Close your eyes, think of 9 October 2002, and try again.",
@@ -1266,7 +1423,204 @@
       // Update when screen size changes
       window.addEventListener("resize", rearrangeGiftArea);
       playRevealAnimation(currentSection);
-      cycleFutureMessages();
+      // cycleFutureMessages(); // disabled: typewriter cycling is currently commented out above
+
+      /* =========================================================
+         SECRET BIRTHDAY-SETTING PANEL
+         Type  editdob  anywhere on the page (not while focused in
+         an input) to open a hidden panel where you can set the
+         real birthday. Hit "Save & Download Updated File" and it
+         downloads a new index.html with that date baked in
+         permanently — replace your old file with it before you
+         upload/host the site. No backend needed.
+         ========================================================= */
+      (function setupSecretBirthdayPanel() {
+        const SECRET_CODE = "editdob";
+        let keyBuffer = "";
+
+        const panel = document.getElementById("dob-admin-panel");
+        const dateField = document.getElementById("dob-admin-date");
+        const hintField = document.getElementById("dob-admin-hint");
+        const applyBtn = document.getElementById("dob-admin-apply");
+        const downloadBtn = document.getElementById("dob-admin-download");
+        const closeBtn = document.getElementById("dob-admin-close");
+        const statusEl = document.getElementById("dob-admin-status");
+
+        if (!panel) return;
+
+        function formatHintDate(isoDate) {
+          if (!isoDate) return "";
+          const [y, m, d] = isoDate.split("-").map(Number);
+          const dt = new Date(Date.UTC(y, m - 1, d));
+          return dt.toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+            timeZone: "UTC",
+          });
+        }
+
+        function setStatus(message, isError) {
+          statusEl.textContent = message;
+          statusEl.className =
+            "dob-admin-status" + (isError ? " is-error" : " is-success");
+        }
+
+        const modeNoteEl = document.getElementById("dob-admin-mode-note");
+
+        function updateModeNote() {
+          if (!modeNoteEl) return;
+          if (window.showSaveFilePicker) {
+            modeNoteEl.textContent =
+              location.protocol === "file:"
+                ? "Your browser supports saving directly to this file — pick your real index.html when asked."
+                : "Your browser supports saving directly to this file when you click save.";
+          } else {
+            modeNoteEl.textContent =
+              "This browser can't save directly — clicking save will download a new file for you to swap in.";
+          }
+        }
+
+        function openPanel() {
+          dateField.value = correctBirthday;
+          hintField.value = formatHintDate(correctBirthday);
+          statusEl.textContent = "";
+          statusEl.className = "dob-admin-status";
+          updateModeNote();
+          panel.classList.add("show");
+        }
+
+        function closePanel() {
+          panel.classList.remove("show");
+        }
+
+        document.addEventListener("keydown", (e) => {
+          if (panel.classList.contains("show")) return;
+          const active = document.activeElement;
+          const isTyping =
+            active &&
+            (active.tagName === "INPUT" ||
+              active.tagName === "TEXTAREA" ||
+              active.isContentEditable);
+          if (isTyping || e.key.length !== 1) return;
+
+          keyBuffer = (keyBuffer + e.key.toLowerCase()).slice(
+            -SECRET_CODE.length,
+          );
+          if (keyBuffer === SECRET_CODE) {
+            keyBuffer = "";
+            openPanel();
+          }
+        });
+
+        closeBtn.addEventListener("click", closePanel);
+        panel.addEventListener("click", (e) => {
+          if (e.target === panel) closePanel();
+        });
+
+        applyBtn.addEventListener("click", () => {
+          const newDate = dateField.value;
+          if (!newDate) {
+            setStatus("Pick a date first.", true);
+            return;
+          }
+          correctBirthday = newDate;
+          birthdayHint.textContent = `Hint: the vault will only open for ${
+            hintField.value || formatHintDate(newDate)
+          }.`;
+          setStatus("Applied for this preview only — not saved yet.", false);
+        });
+
+        // Remembers the on-disk file handle after the first direct save
+        // so later clicks in the same session overwrite it silently
+        // instead of prompting again.
+        let savedFileHandle = null;
+
+        function buildPatchedHtml(newDate, newHint) {
+          let html = "<!doctype html>\n" + document.documentElement.outerHTML;
+          html = html.replace(
+            /let correctBirthday = "[^"]*";/,
+            `let correctBirthday = "${newDate}";`,
+          );
+          html = html.replace(
+            /Hint: the vault will only open for [^.<]*\./,
+            `Hint: the vault will only open for ${newHint}.`,
+          );
+          // Make sure the exported file doesn't open with the panel visible
+          html = html.replace(
+            /id="dob-admin-panel" class="dob-admin-panel show"/,
+            'id="dob-admin-panel" class="dob-admin-panel"',
+          );
+          return html;
+        }
+
+        function downloadAsFile(html) {
+          const blob = new Blob([html], { type: "text/html" });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = "index.html";
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          URL.revokeObjectURL(url);
+        }
+
+        downloadBtn.addEventListener("click", async () => {
+          const newDate = dateField.value;
+          if (!newDate) {
+            setStatus("Pick a date first.", true);
+            return;
+          }
+          const newHint = hintField.value || formatHintDate(newDate);
+          const html = buildPatchedHtml(newDate, newHint);
+
+          let savedDirectly = false;
+
+          // Chrome/Edge on a local http(s) origin (not file://) can write
+          // straight back to the real file on disk — no manual replace.
+          if (window.showSaveFilePicker) {
+            try {
+              if (!savedFileHandle) {
+                savedFileHandle = await window.showSaveFilePicker({
+                  suggestedName: "index.html",
+                  types: [
+                    {
+                      description: "HTML file",
+                      accept: { "text/html": [".html"] },
+                    },
+                  ],
+                });
+              }
+              const writable = await savedFileHandle.createWritable();
+              await writable.write(html);
+              await writable.close();
+              savedDirectly = true;
+            } catch (err) {
+              if (err && err.name === "AbortError") {
+                setStatus("Cancelled — nothing was saved.", true);
+                return;
+              }
+              // Picker unsupported/blocked (e.g. running from file://) — fall
+              // back to a normal download instead.
+              savedFileHandle = null;
+              downloadAsFile(html);
+            }
+          } else {
+            downloadAsFile(html);
+          }
+
+          correctBirthday = newDate;
+          birthdayHint.textContent = `Hint: the vault will only open for ${newHint}.`;
+
+          setStatus(
+            savedDirectly
+              ? "Saved directly to your file. Just host it whenever you're ready."
+              : "Downloaded! Replace your old index.html with this file, then host it.",
+            false,
+          );
+        });
+      })();
     </script>
   </body>
 </html>
