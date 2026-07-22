@@ -3119,3 +3119,104 @@ video {
     border-color: transparent;
   }
 }
+
+.dob-admin-panel {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(20, 12, 24, 0.55);
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", sans-serif;
+}
+.dob-admin-panel.show {
+  display: flex;
+}
+.dob-admin-box {
+  position: relative;
+  width: min(90vw, 380px);
+  background: #fffaf3;
+  border-radius: 16px;
+  padding: 28px 24px 22px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+.dob-admin-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: none;
+  background: none;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  color: #7a5560;
+}
+.dob-admin-title {
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: #5c3a4a;
+}
+.dob-admin-desc {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: #8a6c76;
+  line-height: 1.4;
+}
+.dob-admin-mode-note {
+  margin: -8px 0 16px;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #f3e6ec;
+  color: #7a5560;
+}
+.dob-admin-label {
+  display: block;
+  font-size: 12px;
+  color: #7a5560;
+  margin: 10px 0 4px;
+}
+.dob-admin-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #e3cdd6;
+  font-size: 14px;
+  font-family: inherit;
+}
+.dob-admin-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.dob-admin-btn {
+  flex: 1 1 auto;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid #c98fa8;
+}
+.dob-admin-btn-outline {
+  background: transparent;
+  color: #a8557a;
+}
+.dob-admin-btn-solid {
+  background: #a8557a;
+  color: #fff;
+}
+.dob-admin-status {
+  min-height: 16px;
+  font-size: 12px;
+  margin-top: 10px;
+}
+.dob-admin-status.is-success {
+  color: #3d7a4f;
+}
+.dob-admin-status.is-error {
+  color: #b23a4b;
+}

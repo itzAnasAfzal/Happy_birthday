@@ -13,115 +13,13 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./style.css" />
-    <style>
-      .dob-admin-panel {
-        display: none;
-        position: fixed;
-        inset: 0;
-        z-index: 99999;
-        background: rgba(20, 12, 24, 0.55);
-        align-items: center;
-        justify-content: center;
-        font-family: "Inter", sans-serif;
-      }
-      .dob-admin-panel.show {
-        display: flex;
-      }
-      .dob-admin-box {
-        position: relative;
-        width: min(90vw, 380px);
-        background: #fffaf3;
-        border-radius: 16px;
-        padding: 28px 24px 22px;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-      }
-      .dob-admin-close {
-        position: absolute;
-        top: 10px;
-        right: 12px;
-        border: none;
-        background: none;
-        font-size: 22px;
-        line-height: 1;
-        cursor: pointer;
-        color: #7a5560;
-      }
-      .dob-admin-title {
-        margin: 0 0 6px;
-        font-size: 18px;
-        color: #5c3a4a;
-      }
-      .dob-admin-desc {
-        margin: 0 0 16px;
-        font-size: 13px;
-        color: #8a6c76;
-        line-height: 1.4;
-      }
-      .dob-admin-mode-note {
-        margin: -8px 0 16px;
-        font-size: 12px;
-        line-height: 1.4;
-        padding: 8px 10px;
-        border-radius: 8px;
-        background: #f3e6ec;
-        color: #7a5560;
-      }
-      .dob-admin-label {
-        display: block;
-        font-size: 12px;
-        color: #7a5560;
-        margin: 10px 0 4px;
-      }
-      .dob-admin-input {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 8px 10px;
-        border-radius: 8px;
-        border: 1px solid #e3cdd6;
-        font-size: 14px;
-        font-family: inherit;
-      }
-      .dob-admin-actions {
-        display: flex;
-        gap: 8px;
-        margin-top: 16px;
-        flex-wrap: wrap;
-      }
-      .dob-admin-btn {
-        flex: 1 1 auto;
-        padding: 9px 12px;
-        border-radius: 8px;
-        font-size: 13px;
-        cursor: pointer;
-        border: 1px solid #c98fa8;
-      }
-      .dob-admin-btn-outline {
-        background: transparent;
-        color: #a8557a;
-      }
-      .dob-admin-btn-solid {
-        background: #a8557a;
-        color: #fff;
-      }
-      .dob-admin-status {
-        min-height: 16px;
-        font-size: 12px;
-        margin-top: 10px;
-      }
-      .dob-admin-status.is-success {
-        color: #3d7a4f;
-      }
-      .dob-admin-status.is-error {
-        color: #b23a4b;
-      }
-    </style>
   </head>
 
   <body class="gjs-t-body font-body body">
     <main id="ic74w" data-js="birthday-app" class="birthday-app">
       <section
         id="hero"
-        class="section-screen active screen-enter hero-bg hero-section"
+        class="section-screen active screen-enter hero-bg hero-section is-hero-enter"
       >
         <div id="iymg5" class="hero-decorations romance-shell">
           <div id="i9aai" class="backdrop-orb orb-a"></div>
@@ -153,7 +51,11 @@
           ><span class="dec-item p-12 float-particle">💖</span>
         </div>
         <div id="idfhn" class="hero-container">
-          <div id="i294f" class="hero-intro">
+          <div
+            id="i294f"
+            class="hero-intro section-reveal-item reveal-side reveal-show"
+            style="--reveal-delay: 0s"
+          >
             <span id="ik6uo" class="glass gjs-t-border hero-eyebrow">
               A dreamy celebration wrapped in roses, gold, and starlight
             </span>
@@ -171,7 +73,8 @@
               type="button"
               data-target="love"
               id="iqk4z"
-              class="nav-card glass card-lift floating group navigation-card"
+              class="nav-card glass card-lift floating group navigation-card section-reveal-item reveal-float reveal-show"
+              style="--reveal-delay: 0s"
             >
               <div id="i2vbr" class="card-glow"></div>
               <div id="ifo3p" class="card-top">
@@ -196,7 +99,8 @@
               type="button"
               data-target="photos"
               id="i0wih"
-              class="nav-card glass card-lift floating-slow group navigation-card"
+              class="nav-card glass card-lift floating-slow group navigation-card section-reveal-item reveal-float reveal-show"
+              style="--reveal-delay: 0.12s"
             >
               <div id="ibgih" class="card-glow"></div>
               <div id="i9vbz" class="card-top">
@@ -221,7 +125,8 @@
               type="button"
               data-target="wishes"
               id="iuhi5"
-              class="nav-card glass card-lift floating-slow group navigation-card"
+              class="nav-card glass card-lift floating-slow group navigation-card section-reveal-item reveal-float reveal-show"
+              style="--reveal-delay: 0.24s"
             >
               <div id="ijl6i" class="card-glow"></div>
               <div id="iyuyk" class="card-top">
@@ -244,7 +149,8 @@
               type="button"
               data-target="surprise"
               id="icjwd"
-              class="nav-card glass card-lift pulse-glow group navigation-card"
+              class="nav-card glass card-lift pulse-glow group navigation-card section-reveal-item reveal-float reveal-show"
+              style="--reveal-delay: 0.36s"
             >
               <div id="ittts" class="card-glow"></div>
               <div id="iphmb" class="card-top">
@@ -728,11 +634,8 @@
                 the correct birthday to open a dreamy plan filled with romance,
                 celebration, and unforgettable moments made especially for you.
               </p>
-              <div id="ik5kem" class="glass birthday-form-card">
-                <label
-                  for="birthday-input"
-                  id="ibh562"
-                  class="date-label not-editable"
+              <div id="ik5kem" class="glass birthday-form-card not-editable">
+                <label for="birthday-input" id="ibh562" class="date-label"
                   >Birthday Date</label
                 ><input
                   type="date"
@@ -745,12 +648,12 @@
                     type="button"
                     id="check-birthday"
                     class="continue-button not-editable"
-                    disabled
+                    disabled=""
                   >
                     Open My Surprise
                   </button>
                   <p id="hint-text" class="hint-text">
-                    Hint: the vault will only open for 9 October 2002.
+                    Hint: the vault will only open for 22 July 2026.
                   </p>
                   <div
                     id="birthday-response"
@@ -785,7 +688,7 @@
                     class="close-surprise-btn not-editable"
                     aria-label="Close Surprise"
                   >
-                    &times;
+                    ×
                   </button>
                   <span id="is2bh2" class="reveal-label"
                     >Unlocked Surprise</span
@@ -885,7 +788,7 @@
            with no backend and no visible UI change for guests. -->
       <div
         id="dob-admin-panel"
-        class="dob-admin-panel"
+        class="dob-admin-panel not-editable"
         role="dialog"
         aria-label="Set birthday (hidden panel)"
       >
@@ -896,14 +799,17 @@
             class="dob-admin-close"
             aria-label="Close panel"
           >
-            &times;
+            ×
           </button>
           <h3 class="dob-admin-title">Set the real birthday</h3>
           <p class="dob-admin-desc">
             This is only visible to you. Set the correct date below, then
             download the finished file and use it for hosting.
           </p>
-          <p id="dob-admin-mode-note" class="dob-admin-mode-note"></p>
+          <p id="dob-admin-mode-note" class="dob-admin-mode-note">
+            Your browser supports saving directly to this file when you click
+            save.
+          </p>
           <label class="dob-admin-label" for="dob-admin-date">Birthday</label>
           <input type="date" id="dob-admin-date" class="dob-admin-input" />
           <label class="dob-admin-label" for="dob-admin-hint"
@@ -953,7 +859,7 @@
       const surpriseOverlay = document.getElementById("surprise-overlay");
       // const typewriterMessage = document.getElementById("typewriter-message");
 
-      let correctBirthday = "2026-07-21";
+      let correctBirthday = "2026-07-22";
       const funnyResponses = [
         "Oops, that is not the birthday this fairytale is waiting for.",
         "Close your eyes, think of 9 October 2002, and try again.",
@@ -1621,6 +1527,58 @@
           );
         });
       })();
+    </script>
+    <!-- Code injected by live-server -->
+    <script>
+      // <![CDATA[  <-- For SVG support
+      if ("WebSocket" in window) {
+        (function () {
+          function refreshCSS() {
+            var sheets = [].slice.call(document.getElementsByTagName("link"));
+            var head = document.getElementsByTagName("head")[0];
+            for (var i = 0; i < sheets.length; ++i) {
+              var elem = sheets[i];
+              var parent = elem.parentElement || head;
+              parent.removeChild(elem);
+              var rel = elem.rel;
+              if (
+                (elem.href && typeof rel != "string") ||
+                rel.length == 0 ||
+                rel.toLowerCase() == "stylesheet"
+              ) {
+                var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, "");
+                elem.href =
+                  url +
+                  (url.indexOf("?") >= 0 ? "&" : "?") +
+                  "_cacheOverride=" +
+                  new Date().valueOf();
+              }
+              parent.appendChild(elem);
+            }
+          }
+          var protocol =
+            window.location.protocol === "http:" ? "ws://" : "wss://";
+          var address =
+            protocol + window.location.host + window.location.pathname + "/ws";
+          var socket = new WebSocket(address);
+          socket.onmessage = function (msg) {
+            if (msg.data == "reload") window.location.reload();
+            else if (msg.data == "refreshcss") refreshCSS();
+          };
+          if (
+            sessionStorage &&
+            !sessionStorage.getItem("IsThisFirstTime_Log_From_LiveServer")
+          ) {
+            console.log("Live reload enabled.");
+            sessionStorage.setItem("IsThisFirstTime_Log_From_LiveServer", true);
+          }
+        })();
+      } else {
+        console.error(
+          "Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.",
+        );
+      }
+      // ]]>
     </script>
   </body>
 </html>
